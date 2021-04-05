@@ -1,9 +1,9 @@
 //db to store all workout information 
 
 //require mongoose
-const mongooose = require('mongoose');
+const mongoose = require('mongoose');
 
-const Schema = mongooose.Schema;
+const Schema = mongoose.Schema;
 
 const workoutSchema = new Schema({
     day: {
@@ -48,4 +48,4 @@ const workoutSchema = new Schema({
 
 const Workout = mongoose.model("Workout", workoutSchema);
 
-modeule.exports = Workout;
+module.exports = Workout;
