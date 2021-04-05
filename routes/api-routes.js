@@ -36,13 +36,11 @@ module.exports = function(app) {
         });
     });
 
-    app.get("/api/workouts/range", (req,res) => {
-        db.Workout.find({}, (err,workout) => {
-            if(err){
-                console.log(err);          
-            } else {
-                res.json(workout);
-            }
-        });  
+    app.get("/api/workouts/range", ({}, req,res) => {
+        db.Workout.find({}).then((workout) => {
+            res.json(workout);
+        }).catch(err => {
+            res.status(400).json(err);
+        }); 
     });
 }
