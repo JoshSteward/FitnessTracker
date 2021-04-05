@@ -7,11 +7,11 @@ module.exports = (app) => {
         res.sendFile(path.join(__dirname, '../public/index.html'));
     });
     //exercise.html
-    app.get('/', (req,res) => {
+    app.get('/exercise', (req,res) => {
         res.sendFile(path.join(__dirname, '../public/exercise.html'));
     });
     //stats.html
-    app.get('/', (req,res) => {
+    app.get('/stats', (req,res) => {
         res.sendFile(path.join(__dirname, '../public/stats.html'));
     });
 }
