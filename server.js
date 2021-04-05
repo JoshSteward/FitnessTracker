@@ -23,7 +23,7 @@ const db = require("./models");
 
 //require routes
 require("./routes/api-routes.js")(app)
-//require("./routes/html-routes.js")(app)
+require("./routes/html-routes.js")(app)
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
