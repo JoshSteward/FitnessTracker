@@ -62,7 +62,7 @@ module.exports = function(app) {
     //});
 
     app.get("/api/workouts/range", (req,res) => {
-        Workout.agrregate([
+        Workout.aggregate([
             { $addFields: {
                 totalDuration: { $sum: "$exercises.duration"}
             }
