@@ -50,7 +50,7 @@ stewardjosh10@gmail.com
 
 https://github.com/JoshSteward/FitnessTracker
 <br>
-https://dashboard.heroku.com/apps/aqueous-fortress-43110
+https://dashboard.heroku.com/apps/aqueous-fortress-43110 - Heroku not yet linked to database
 
 ## Github
 
