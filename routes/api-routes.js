@@ -62,6 +62,7 @@ module.exports = function(app) {
         //});  
     //});
 
+    /*
     app.get("/api/workouts/range", (req,res) => {
         db.Workout.aggregate([
             { $addFields: {
@@ -76,6 +77,29 @@ module.exports = function(app) {
             console.log(workout);
             if(err){
                 console.log(err);          
+            } else {
+                res.json(workout);
+            }
+        });  
+    });
+*/
+    app.get("/api/workouts/range", (req,res) => {
+        //db.Workout.find({}, (err,workout) => {
+        db.Workout.aggregate([
+            { $addFields: {
+                totalDuration: { $sum: "$exercises.duration"}
+            }
+        },
+        {
+            $sort: {
+                day: -1 
+            }
+        },
+        {$limit:7}
+    ], (err,workout) => {
+            console.log(workout);
+            if(err){
+                console.log(err);
             } else {
                 res.json(workout);
             }
