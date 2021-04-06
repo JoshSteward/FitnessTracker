@@ -15,9 +15,9 @@ module.exports = function(app) {
     //});
 
     app.get("/api/workouts", (req,res) => {
-        Workout.aggregate([
+        db.Workout.aggregate([
             {$addFields: {
-                totalDuration: {sum: "$exercises.duration"}
+                totalDuration: {$sum: "$exercises.duration"}
             }
         }], (err,workout) => {
             if(err){
@@ -31,7 +31,8 @@ module.exports = function(app) {
 
     //add exercise
     app.put("/api/workouts/:id", (req,res) => {
-        Workout.findByIdAndUpdate(req.params.id,
+        console.log("Exercise: "+ JSON.stringify(req.body));
+        db.Workout.findByIdAndUpdate(req.params.id,
             {$push: { exercises: req.body }},
             {new:true, runValidators: true}
         )
@@ -45,11 +46,10 @@ module.exports = function(app) {
 
     //create new workout
     app.post("/api/workouts", (req,res) => {
-        db.Workout.create(req.body).then(workout => {
+        db.Workout.create({}).then(workout => {
             res.json(workout);
         });
     });
-
     //app.get("/api/workouts/range", (req,res) => {
         //db.Workout.find({}, (err,workout) => {
             //console.log(workout);
@@ -62,18 +62,16 @@ module.exports = function(app) {
     //});
 
     app.get("/api/workouts/range", (req,res) => {
-        Workout.aggregate([
+        db.Workout.aggregate([
             { $addFields: {
                 totalDuration: { $sum: "$exercises.duration"}
             }
-        },
-        {
-            $sort: {
+        }])
+        .sort({
                 day: -1 
-            }
-        },
-        {$limit:7}
-    ], (err,workout) => {
+            })
+        .limit(7)
+    .then((err,workout) => {
             console.log(workout);
             if(err){
                 console.log(err);          
